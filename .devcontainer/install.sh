@@ -16,10 +16,15 @@ sudo apt-get install -y --no-install-recommends \
   git-lfs \
   fastfetch
 
-# ✅ Install KasmVNC (latest)
-wget -qO kasmvnc.deb https://github.com/kasmtech/KasmVNC/releases/latest/download/kasmvncserver_amd64.deb
-sudo apt install -y ./kasmvnc.deb
-rm kasmvnc.deb
+# ✅ Install KasmVNC (from workspace)
+if [ -f ./kasmvnc.deb ]; then
+  sudo apt install -y ./kasmvnc.deb
+else
+  echo "⚠️ kasmvnc.deb not found in workspace, downloading latest..."
+  wget -qO kasmvnc.deb https://github.com/kasmtech/KasmVNC/releases/latest/download/kasmvncserver_amd64.deb
+  sudo apt install -y ./kasmvnc.deb
+  rm kasmvnc.deb
+fi
 
 # Chrome
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub \
